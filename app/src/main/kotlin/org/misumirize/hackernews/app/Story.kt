@@ -10,7 +10,6 @@ class Story(val by: String,
             // TODO: val time
             val text: String,
             val title: String,
-            val type: String,
             val url: String) : Serializable {
 
     fun getDescription(): String {
