@@ -9,17 +9,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 
-
 public class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction().add(R.id.container, PlaceholderFragment()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.container, StoryListFragment()).commit()
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -39,17 +37,5 @@ public class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public class PlaceholderFragment : Fragment() {
-
-        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater!!.inflate(R.layout.fragment_stories, container, false)
-            return rootView
-        }
     }
 }
