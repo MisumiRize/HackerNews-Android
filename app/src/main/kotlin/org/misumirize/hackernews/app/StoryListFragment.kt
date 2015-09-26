@@ -8,7 +8,7 @@ class StoryListFragment : ListFragment(), StoryView {
 
     val presenter = StoryListPresenter(this)
     var adapter: StoryListAdapter? = null
-    var stories: List<Story>? = null
+    var stories: ArrayList<Story> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +20,11 @@ class StoryListFragment : ListFragment(), StoryView {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putSerializable("stories", ArrayList<Story>(stories))
+        outState?.putSerializable("stories", stories)
     }
 
     override fun onStories(stories: List<Story>) {
-        this.stories = stories
+        this.stories.addAll(stories)
         adapter!!.addAll(stories)
         adapter!!.notifyDataSetChanged()
     }

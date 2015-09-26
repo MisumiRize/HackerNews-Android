@@ -43,21 +43,9 @@ android {
         }
     }
 
-    productFlavors {
-        mocked {
-            buildConfigField 'boolean', 'NETWORK_MOCKED', 'true'
-        }
-
-        production {
-            buildConfigField 'boolean', 'NETWORK_MOCKED', 'false'
-        }
-    }
-
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
-        mocked.java.srcDirs += 'src/mocked/kotlin'
-        production.java.srcDirs += 'src/production/kotlin'
     }
 
     packagingOptions {
