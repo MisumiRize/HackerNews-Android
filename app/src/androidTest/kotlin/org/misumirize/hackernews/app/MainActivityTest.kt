@@ -60,7 +60,7 @@ class MainActivityTest {
     }
 
     @Test
-    fun storyListFragmentWillDisplayStories() {
+    fun testStoryListFragmentWillDisplayStories() {
         Espresso.onView(ViewMatchers.withClassName(Matchers.endsWith("ListView")))
                 .check { view, noMatchingViewException ->
                     assertEquals((view!! as ListView).count, 30)
