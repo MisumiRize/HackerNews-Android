@@ -24,8 +24,9 @@ test:
   pre:
     - vagrant up --provider=digital_ocean:
         timeout: 600
-    - ANDROID_REMOTE_IP=$(vagrant ssh-config | grep HostName | awk '{print $2}')
-    - sed -i "s/<% ANDROID_REMOTE_IP %>/$ANDROID_REMOTE_IP/g" haproxy.cfg
+    - |
+      ANDROID_REMOTE_IP=$(vagrant ssh-config | grep HostName | awk '{print $2}')
+      sed -i "s/<% ANDROID_REMOTE_IP %>/$ANDROID_REMOTE_IP/g" haproxy.cfg
     - docker build --rm -t android-build .
   override:
     - docker run android-build
