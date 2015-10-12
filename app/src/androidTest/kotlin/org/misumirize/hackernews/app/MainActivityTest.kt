@@ -9,10 +9,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.test.suitebuilder.annotation.LargeTest
 import android.widget.ListView
 import org.hamcrest.Matchers
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import java.util.*
 import kotlin.test.assertEquals
@@ -42,6 +39,14 @@ class MainActivityTest {
             this.resourceCallback = resourceCallback
         }
 
+    }
+
+    companion object {
+
+        private val animationsRule = DisableAnimationsRule()
+
+        @ClassRule
+        public fun getDisableAnimationsRule(): DisableAnimationsRule = animationsRule
     }
 
     private val activityRule = ActivityTestRule(MainActivity::class.java)

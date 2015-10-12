@@ -53,6 +53,10 @@ android {
     }
 }
 
+task grantAnimationPermission(type: Exec, dependsOn: 'installDebug') {
+    commandLine "adb shell pm grant $android.defaultConfig.applicationId android.permission.SET_ANIMATION_SCALE".split(' ')
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.1'
