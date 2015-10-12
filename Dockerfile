@@ -13,6 +13,8 @@ WORKDIR $PROJECT
 
 COPY . $PROJECT
 
-RUN echo "sdk.dir=$ANDROID_HOME" > local.properties
+RUN echo "sdk.dir=$ANDROID_HOME" > local.properties && \
+    wget https://raw.githubusercontent.com/travis-ci/travis-cookbooks/master/community-cookbooks/android-sdk/files/default/android-wait-for-emulator && \
+    chmod +x android-wait-for-emulator
 
-CMD /etc/init.d/haproxy start && ./gradlew connectedAndroidTest
+CMD /etc/init.d/haproxy start && ./android-wait-for-emulator && ./gradlew connectedAndroidTest
