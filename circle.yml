@@ -6,6 +6,7 @@ dependencies:
   cache_directories:
     - ~/.vagrant.d
     - ~/tmp
+    - ~/.docker
   override:
     - |
       mkdir -p ~/tmp
@@ -19,6 +20,14 @@ dependencies:
       if ! vagrant plugin list | fgrep -q vagrant-digitalocean; then
         vagrant plugin install vagrant-digitalocean
       fi
+    - |
+      if -e ~/.docker/android-remote-client.tar; then
+        docker load -i ~/.docker/android-remote-client.tar
+      else
+        mkdir ~/.docker
+        docker pull misumirize/android-remote-client
+        docker save misumirize/android-remote-client > ~/.docker/android-remote-client.tar
+      fi
 
 test:
   pre:
@@ -29,6 +38,6 @@ test:
       sed -i "s/<% ANDROID_REMOTE_IP %>/$ANDROID_REMOTE_IP/g" haproxy.cfg
     - docker build --rm -t android-build .
   override:
-    - docker run android-build
+    - docker run -v ~/.gradle:/root/.gradle android-build
   post:
     - vagrant destroy -f
