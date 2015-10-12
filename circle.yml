@@ -6,7 +6,7 @@ dependencies:
   cache_directories:
     - ~/.vagrant.d
     - ~/tmp
-  pre:
+  override:
     - |
       mkdir -p ~/tmp
       cd ~/tmp
