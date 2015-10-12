@@ -1,0 +1,33 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - ~/.vagrant.d
+    - ~/tmp
+  pre:
+    - |
+      mkdir -p ~/tmp
+      cd ~/tmp
+      VERSION=1.7.4
+      if [ ! -f vagrant_${VERSION}_x86_64.deb ]; then
+        wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VERSION}_x86_64.deb
+      fi
+      sudo dpkg -i vagrant_${VERSION}_x86_64.deb
+    - |
+      if ! vagrant plugin list | fgrep -q vagrant-digitalocean; then
+        vagrant plugin install vagrant-digitalocean
+      fi
+
+test:
+  pre:
+    - vagrant up --provider=digital_ocean:
+        timeout: 600
+    - ANDROID_REMOTE_IP=$(vagrant ssh-config | grep HostName | awk '{print $2}')
+    - sed -i "s/<% ANDROID_REMOTE_IP %>/$ANDROID_REMOTE_IP/g" haproxy.cfg
+    - docker build -t android-build
+  override:
+    - docker run android-build
+  post:
+    - vagrant destroy -f
