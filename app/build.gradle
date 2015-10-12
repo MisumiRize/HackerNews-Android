@@ -70,4 +70,4 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
 }
 
-com.android.ddmlib.DdmPreferences.setTimeOut(30000)
+com.android.ddmlib.DdmPreferences.setTimeOut(120000)
