@@ -21,7 +21,7 @@ dependencies:
         vagrant plugin install vagrant-digitalocean
       fi
     - |
-      if -e ~/.docker/android-remote-client.tar; then
+      if [ -e ~/.docker/android-remote-client.tar ]; then
         docker load -i ~/.docker/android-remote-client.tar
       else
         mkdir ~/.docker
