@@ -14,6 +14,6 @@ Vagrant.configure(2) do |config|
     provider.image = 13925467
     provider.region = 'sgp1'
     provider.ssh_key_name = ENV['DIGITALOCEAN_SSH_KEY_NAME']
-    provider.size = '4gb'
+    provider.size = '8gb'
   end
 end
