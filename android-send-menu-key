@@ -1,6 +1,0 @@
-#!/bin/bash
-
-set -e
-set -x
-
-adb shell input keyevent 82 &
